@@ -1,7 +1,7 @@
 part of '../home_view.dart';
 
 class _HomeBody extends StatelessWidget {
-  const _HomeBody({super.key});
+  const _HomeBody();
 
   @override
   Widget build(BuildContext context) {
