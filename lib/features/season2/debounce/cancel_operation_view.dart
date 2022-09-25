@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:short_but_gold/features/season2/debounce/debounce_manager.dart';
+import 'package:short_but_gold/features/season2/asset/image_asset.dart';
+import 'package:short_but_gold/features/season2/debounce/custom_operation.dart';
+import 'package:short_but_gold/features/season2/padd%C4%B1ng/page_padding.dart';
+
+import '../launch/gallery_launch.dart';
 
 class CancelOperationView extends StatefulWidget {
   const CancelOperationView({Key? key}) : super(key: key);
@@ -7,10 +11,10 @@ class CancelOperationView extends StatefulWidget {
   State<CancelOperationView> createState() => _CancelOperationViewState();
 }
 
-class _CancelOperationViewState extends State<CancelOperationView> {
+class _CancelOperationViewState extends State<CancelOperationView> with GalleryLaunch {
   late CancelableCustomOperation<bool> cancelableCustomOperation;
 
-  bool _isLike = false;
+  final bool _isLike = false;
   bool _isLoading = false;
 
   void _changeLoading() {
@@ -21,7 +25,6 @@ class _CancelOperationViewState extends State<CancelOperationView> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     cancelableCustomOperation = CancelableCustomOperation((value) {
       _controlService(value);
@@ -37,33 +40,62 @@ class _CancelOperationViewState extends State<CancelOperationView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          print('Changed is like');
-          setState(() {
-            _isLike = !_isLike;
-          });
-          cancelableCustomOperation.onItemChanged(_isLike);
-        },
-      ),
-      appBar: AppBar(
-        actions: [
-          if (_isLoading)
-            const Center(
-              child: CircularProgressIndicator(
-                color: Colors.white,
-              ),
-            )
-        ],
-      ),
-      body: Center(
-        child: Icon(
-          Icons.favorite,
-          size: kToolbarHeight,
-          color: _isLike ? Colors.pink : Colors.grey,
+    return Padding(
+      padding: const PagePadding.onlyLeft(),
+      child: Scaffold(
+        child:,
+        floatingActionButton: FloatingActionButton(
+        
+          onPressed: () {
+            open();
+            // print('Changed is like');
+            // setState(() {
+            //   _isLike = !_isLike;
+            // });
+            // cancelableCustomOperation.onItemChanged(_isLike);
+
+            // showModalBottomSheet(
+            //   context: context,
+            //   builder: (context) => const Text('a'),
+            // );
+
+            // const CustomPage().show(context);
+          },
+        ),
+        appBar: AppBar(
+          actions: [
+            Image.asset(ImageConstants.instance.appIcon),
+            if (_isLoading)
+              const Center(
+                child: CircularProgressIndicator(
+                  color: Colors.white,
+                ),
+              )
+          ],
+        ),
+        body: Center(
+          child: Icon(
+            Icons.favorite,
+            size: kToolbarHeight,
+            color: _isLike ? Colors.pink : Colors.grey,
+          ),
         ),
       ),
     );
+  }
+}
+
+class CustomPage extends StatelessWidget {
+  const CustomPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
+
+extension CustomPageSheet on CustomPage {
+  Future<T?> show<T>(BuildContext context) {
+    return showModalBottomSheet(context: context, builder: (context) => this);
   }
 }

@@ -4,7 +4,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 mixin GalleryLaunch {
   final String _iosPhotoScheme = 'photos-redirect://';
-  final String _androidPhotoScheme = 'content://media/external/images/media';
+  final String _androidPhotoScheme = 'content://media/external/images/media/';
 
   /// It'll be open gallery on device
   ///
