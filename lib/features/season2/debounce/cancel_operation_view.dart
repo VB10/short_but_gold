@@ -14,7 +14,7 @@ class CancelOperationView extends StatefulWidget {
 class _CancelOperationViewState extends State<CancelOperationView> with GalleryLaunch {
   late CancelableCustomOperation<bool> cancelableCustomOperation;
 
-  final bool _isLike = false;
+  bool _isLike = false;
   bool _isLoading = false;
 
   void _changeLoading() {
@@ -43,23 +43,20 @@ class _CancelOperationViewState extends State<CancelOperationView> with GalleryL
     return Padding(
       padding: const PagePadding.onlyLeft(),
       child: Scaffold(
-        child:,
         floatingActionButton: FloatingActionButton(
-        
           onPressed: () {
-            open();
-            // print('Changed is like');
-            // setState(() {
-            //   _isLike = !_isLike;
-            // });
-            // cancelableCustomOperation.onItemChanged(_isLike);
+            print('Changed is like');
+            setState(() {
+              _isLike = !_isLike;
+            });
+            cancelableCustomOperation.onItemChanged(_isLike);
 
-            // showModalBottomSheet(
-            //   context: context,
-            //   builder: (context) => const Text('a'),
-            // );
+            showModalBottomSheet(
+              context: context,
+              builder: (context) => const Text('a'),
+            );
 
-            // const CustomPage().show(context);
+            const CustomPage().show(context);
           },
         ),
         appBar: AppBar(
